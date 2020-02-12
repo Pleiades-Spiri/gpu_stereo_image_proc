@@ -9,6 +9,7 @@
 
   <arg     if="$(arg respawn)" name="bond" value="" />
   <arg unless="$(arg respawn)" name="bond" value="--no-bond" />
+  
 
   <!-- Basic processing for left camera -->
   <include file="$(find image_proc)/launch/image_proc.launch"
@@ -17,7 +18,7 @@
     <arg name="respawn" value="$(arg respawn)" />
   </include>
 
-  <!-- Basic processing for right camera -->
+  <!-- Basic processing for right camera --> 
   <include file="$(find image_proc)/launch/image_proc.launch"
 	   ns="$(arg right)">
     <arg name="manager" value="$(arg manager)" />
@@ -27,14 +28,14 @@
   <!-- Disparity image -->
   <node pkg="nodelet" type="nodelet" name="disparity"
         args="load gpu_stereo_image_proc/libsgm_disparity $(arg manager) $(arg bond)"
-	respawn="$(arg respawn)" >
+	respawn="$(arg respawn)"  output="screen">
     <param name="approximate_sync" value="$(arg approximate_sync)" />
   </node>
 
   <!-- PointCloud2 -->
   <node pkg="nodelet" type="nodelet" name="point_cloud2"
         args="load stereo_image_proc/point_cloud2 $(arg manager) $(arg bond)"
-	respawn="$(arg respawn)" >
+	respawn="$(arg respawn)" output="screen">
     <param name="approximate_sync" value="$(arg approximate_sync)" />
   </node>
 

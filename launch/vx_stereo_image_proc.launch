@@ -11,18 +11,18 @@
   <arg unless="$(arg respawn)" name="bond" value="--no-bond" />
 
   <!-- Basic processing for left camera -->
-  <include file="$(find image_proc)/launch/image_proc.launch"
+  <!--<include file="$(find image_proc)/launch/image_proc.launch"
 	   ns="$(arg left)">
     <arg name="manager" value="$(arg manager)" />
     <arg name="respawn" value="$(arg respawn)" />
-  </include>
+  </include>-->
 
   <!-- Basic processing for right camera -->
-  <include file="$(find image_proc)/launch/image_proc.launch"
+  <!--<include file="$(find image_proc)/launch/image_proc.launch"
 	   ns="$(arg right)">
     <arg name="manager" value="$(arg manager)" />
     <arg name="respawn" value="$(arg respawn)" />
-  </include>
+  </include>-->
 
   <!-- Disparity image -->
   <node pkg="nodelet" type="nodelet" name="disparity"
