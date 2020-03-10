@@ -5,12 +5,11 @@
   <arg name="respawn" default="false" />
   <arg name="left" default="left" />
   <arg name="right" default="right" />
-  <arg name="approximate_sync" default="false" />
+  <arg name="approximate_sync" default="true" />
 
   <arg     if="$(arg respawn)" name="bond" value="" />
   <arg unless="$(arg respawn)" name="bond" value="--no-bond" />
   
-
   <!-- Basic processing for left camera -->
   <include file="$(find image_proc)/launch/image_proc.launch"
 	   ns="$(arg left)">
@@ -39,7 +38,8 @@
     <param name="approximate_sync" value="$(arg approximate_sync)" />
   </node>
 
-  <node pkg="tf2_ros" type="static_transform_publisher" name="map_to_tmp" args="0 0 0 0 1.57079632679 0 map tmp" ns="stereo" />
-  <node pkg="tf2_ros" type="static_transform_publisher" name="tmp_to_cameraLeft" args="0 0 0 -1.57079632679 0 0 tmp cameraLeft" ns="stereo" />
-  
+  <!--<node pkg="tf2_ros" type="static_transform_publisher" name="map_to_fcu" args="0 0 0 0 1.57079632679 0 map fcu" ns="stereo" />-->
+  <node pkg="tf2_ros" type="static_transform_publisher" name="fcu_to_cameraLeft" args="0 0 0 0 0 0 fcu front_camera_link" ns="stereo" />
+  <node pkg="topic_tools" type="throttle" name="image_mono_throttle" args="messages /stereo/left/image_mono 15.0"/>
+  <node name="vins_pointcloud_tf_transformer" pkg="topic_tools" type="transform" output="screen" args="/stereo/points2 /stereo/points2_tf sensor_msgs/PointCloud2 'sensor_msgs.msg.PointCloud2(header=std_msgs.msg.Header(seq=m.header.seq,stamp=m.header.stamp,frame_id=&quot;camera_front_link&quot;),height=m.height,width=m.width,point_step=m.point_step,row_step=m.row_step,data=m.data)' --import sensor_msgs std_msgs "/>
 </launch>

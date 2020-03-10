@@ -20,13 +20,13 @@ catkin_package(
 )
 
 include_directories(include)
-
-find_package(OpenCV 4.0 REQUIRED) 
+find_package(OpenCV 3.3 REQUIRED) 
 include_directories(${catkin_INCLUDE_DIRS} ${OpenCV_INCLUDE_DIRS})
 find_package(VisionWorks REQUIRED)
 include_directories(${VisionWorks_INCLUDE_DIRS})
 
 find_package(CUDA REQUIRED)
+message(${CUDA_VERSION})
 set(CUDA_ARCH "-arch=sm_50" CACHE STRING "Value of the NVCC -arch option.")
 if(${CMAKE_VERSION} VERSION_EQUAL 3.7 OR ${CMAKE_VERSION} VERSION_GREATER 3.7)
   option(AUTO_DETECT_ARCH "Detect local GPU compute arch automatically" ON)
