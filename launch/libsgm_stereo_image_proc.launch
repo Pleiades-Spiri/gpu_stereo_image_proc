@@ -39,8 +39,8 @@
   </node>
 
   <!--<node pkg="tf2_ros" type="static_transform_publisher" name="map_to_fcu" args="0 0 0 0 1.57079632679 0 map fcu" ns="stereo" />-->
-  <node pkg="tf" type="static_transform_publisher" name="fcu_to_cameraLeft" args="0 0 0 -0.5963956 0.5963956 -0.3798217 0.3799475 fcu front_camera_link 10" ns="stereo" />
+  <node pkg="tf" type="static_transform_publisher" name="fcu_to_cameraLeft" args="0 0 0 -1.57 0 -1.57 fcu front_camera_link 10" ns="stereo" />
   <node pkg="tf" type="static_transform_publisher" name="fcu_to_Left_link" args="0 0 0 -1.57 0 -1.57 fcu left_link 10" ns="stereo" />
   <!--<node pkg="topic_tools" type="throttle" name="image_mono_throttle" args="messages /stereo/left/image_mono 15.0"/>-->
-  <node name="pointcloud_tf_transformer" pkg="topic_tools" type="transform" output="screen" args="/stereo/points2 /stereo/points2_tf sensor_msgs/PointCloud2 'sensor_msgs.msg.PointCloud2(header=std_msgs.msg.Header(seq=m.header.seq,stamp=m.header.stamp,frame_id=&quot;front_camera_link&quot;),height=m.height,width=m.width,fields=m.fields,point_step=m.point_step,row_step=m.row_step,data=m.data)' --import sensor_msgs std_msgs "/>
+  <!--<node name="pointcloud_tf_transformer" pkg="topic_tools" type="transform" output="screen" args="/stereo/points2 /stereo/points2_tf sensor_msgs/PointCloud2 'sensor_msgs.msg.PointCloud2(header=std_msgs.msg.Header(seq=m.header.seq,stamp=m.header.stamp,frame_id=&quot;front_camera_link&quot;),height=m.height,width=m.width,fields=m.fields,point_step=m.point_step,row_step=m.row_step,data=m.data)' import sensor_msgs std_msgs "/>-->
 </launch>
